@@ -1,6 +1,20 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
-import {SortableContainer, SortableElement} from 'react-sortable-hoc';
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+const arrayMove = require('array-move');
+
+const SortableItem = SortableElement(({value}) => <li><img height="60" src={value} /></li>);
+ 
+const SortableList = SortableContainer(({items}) => {
+  return (
+    <ul>
+      {items.map((value, index) => (
+        <SortableItem key={`item-${value}`} index={index} value={value} />
+      ))}
+    </ul>
+  );
+});
+ 
 
 class App extends React.Component {
   constructor(props) {
@@ -10,23 +24,23 @@ class App extends React.Component {
       textareaValueAlt: '',
       textareaValueLinks: '',
       textareaValueImages: '',
-      imageUrls: [],
+      imageUrls: []
     }
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    // this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleTabClick = this.handleTabClick.bind(this);
     this.onDrop = this.onDrop.bind(this);
+    this.onSortEnd = this.onSortEnd.bind(this);
   }
 
   handleTabClick(event) {
     this.setState({ activeTab: event.target.value });
   }
 
-  handleFormSubmit(event) {
-    event.preventDefault();
-    // const { textareaValue } = this.state;
-
-    document.location = '#step2';
+  onSortEnd({ oldIndex, newIndex }) {
+    this.setState({
+      imageUrls: arrayMove(this.state.imageUrls, oldIndex, newIndex),
+    });
   }
 
   handleInputChange(event) {
@@ -49,7 +63,7 @@ class App extends React.Component {
 
   render() {
     const {
-      textareaValueAlt, activeTab, textareaValueLinks, textareaValueImages
+      imageUrls, textareaValueAlt, activeTab, textareaValueLinks, textareaValueImages
     } = this.state;
     return (
       <div>
@@ -91,7 +105,8 @@ class App extends React.Component {
                 <Dropzone
                   disableClick
                   style={{}}
-                  onDrop={this.onDrop}>{({getRootProps, isDragActive}) => (
+                  onDrop={this.onDrop}>{({ getRootProps, isDragActive }) => (
+                    this.state.imageUrls.length == 0 ? 
                     <textarea
                       {...getRootProps()}
                       style={{ backgroundColor: (isDragActive ? '#ddd' : 'initial') }}
@@ -100,12 +115,11 @@ class App extends React.Component {
                       id="images"
                       name="textareaValueImages"
                       value={textareaValueImages}
-                      onChange={this.handleInputChange} />
+                      onChange={this.handleInputChange} /> 
+                      :
+                      <SortableList items={this.state.imageUrls} onSortEnd={this.onSortEnd} />
                   )}</Dropzone>
               </label>
-              {this.state.imageUrls.map(imageUrl => (
-                <img src={imageUrl} height="60" />
-              ))}
             </div>
           </form>
           <br />
