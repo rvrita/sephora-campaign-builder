@@ -429,11 +429,6 @@ form .image-input {
   border-bottom: 1px solid #ddd;
 }
 
-/* .image-input ul:active,
-.image-input ul:hover {
-  list-style: none;
-} */
-
 .image-input img {
   width: 100%;
   height: 100%;

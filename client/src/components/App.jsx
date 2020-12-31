@@ -2,7 +2,7 @@ import React from 'react';
 import Dropzone from 'react-dropzone';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 const arrayMove = require('array-move');
-import content_template from '../../../templates/content-template';
+import content_template from '../../../templates/main-content-template';
 
 const SortableItem = SortableElement(({ value, onLoad }) => <li><img height="60" src={value} onLoad={onLoad} /></li>);
 
@@ -50,7 +50,7 @@ class App extends React.Component {
   onLoad(e) {
     var newImageInfos = this.state.imageInfos.slice();
     var index = newImageInfos.findIndex(item => item.url === e.target.src);
-    console.log('in onload', e.target);
+    // console.log('in onload', e.target);
     newImageInfos[index].width = e.target.naturalWidth;
     newImageInfos[index].height = e.target.naturalHeight;
 
@@ -73,7 +73,12 @@ class App extends React.Component {
     var currWidth = 0;
 
     for (var i = 0; i < images.length; i++) {
-      if (images[i].width === 700) {
+      var item = {
+        ...images[i],
+        alt: this.state.textareaValueAlts[i] || '',
+        link: this.state.textareaValueLinks[i] || '<a href="#">',
+      };
+      if (item.width === 700) {
         // full width new section
         if (currWidth > 0) {
           console.log("Warning: section less than 700px width.", newSection);
@@ -81,19 +86,20 @@ class App extends React.Component {
           newSection = [];
           currWidth = 0;
         }
-        newSections.push([images[i]]);
-      } else if (images[i].width === 320) {
+        newSections.push([item]);
+      } else if (item.width === 320) {
         // botnavs
+        // TODO: fix this
         if (images[i+1] && images[i+1].width === 320) {
-          newSections.push([images[i], images[i+1]]);
+          newSections.push([item, images[i+1]]);
           i++;
         } else {
-          newSections.push([images[i]]);
+          newSections.push([item]);
         }
       } else {
         // vertical section, add image to current
-        currWidth += images[i].width;
-        newSection.push(images[i]);
+        currWidth += item.width;
+        newSection.push(item);
         if (currWidth >= 700) {
           if (currWidth > 700) {
             console.log("Warning: section exceeded 700px width.", newSection);
@@ -113,7 +119,7 @@ class App extends React.Component {
     const { name, value } = event.target;
     this.setState({
       [name]: value.split('\n'),
-    });
+    }, () => this.buildSections());
   }
 
   onDrop(droppedFiles) {
@@ -136,10 +142,10 @@ class App extends React.Component {
 
   render() {
     const {
-      imageInfos, textareaValueAlts, activeTab, textareaValueLinks, textareaValueImages
+      sections, textareaValueAlts, activeTab, textareaValueLinks, textareaValueImages
     } = this.state;
-    if (imageInfos.length > 0) {
-      var productsHtml = content_template(imageInfos, textareaValueAlts, textareaValueLinks).replace(/\n\s+\n/g, '\n');
+    if (sections.length > 0) {
+      var productsHtml = content_template(sections, textareaValueAlts, textareaValueLinks).replace(/\n\s+\n/g, '\n');
     }
     return (
       <div>
