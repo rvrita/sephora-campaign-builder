@@ -1,5 +1,6 @@
 /* eslint-disable no-else-return */
 export default function content_template(imageInfos, alts, links) {
+  // export default function content_template(sections) {
   return `<!-- email main content -->
   <table width="700" border="0" cellspacing="0" cellpadding="0" align="center">
   ${imageInfos.map((image, index) => {

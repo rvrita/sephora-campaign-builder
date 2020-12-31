@@ -4,9 +4,9 @@ import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 const arrayMove = require('array-move');
 import content_template from '../../../templates/content-template';
 
-const SortableItem = SortableElement(({value, onLoad}) => <li><img height="60" src={value} onLoad={onLoad}/></li>);
- 
-const SortableList = SortableContainer(({items, onLoad}) => {
+const SortableItem = SortableElement(({ value, onLoad }) => <li><img height="60" src={value} onLoad={onLoad} /></li>);
+
+const SortableList = SortableContainer(({ items, onLoad }) => {
   return (
     <ul>
       {items.map((value, index) => (
@@ -25,6 +25,7 @@ class App extends React.Component {
       textareaValueLinks: [],
       textareaValueImages: [],
       imageInfos: [],
+      sections: [],
       /**
        * { 
        *   url: '',
@@ -39,6 +40,7 @@ class App extends React.Component {
     this.onDrop = this.onDrop.bind(this);
     this.onSortEnd = this.onSortEnd.bind(this);
     this.onLoad = this.onLoad.bind(this);
+    this.buildSections = this.buildSections.bind(this);
   }
 
   handleTabClick(event) {
@@ -51,23 +53,67 @@ class App extends React.Component {
     console.log('in onload', e.target);
     newImageInfos[index].width = e.target.naturalWidth;
     newImageInfos[index].height = e.target.naturalHeight;
-    
-    this.setState({ 
+
+    this.setState({
       imageInfos: newImageInfos
-     }, () => console.log('after ', this.state));
+    }, () => console.log('after ', this.state));
   }
 
   onSortEnd({ oldIndex, newIndex }) {
     this.setState({
       imageInfos: arrayMove(this.state.imageInfos, oldIndex, newIndex),
     });
+    this.buildSections();
+  }
+
+  buildSections() {
+    var newSections = [];
+    var images = this.state.imageInfos;
+    var newSection = [];
+    var currWidth = 0;
+
+    for (var i = 0; i < images.length; i++) {
+      if (images[i].width === 700) {
+        // full width new section
+        if (currWidth > 0) {
+          console.log("Warning: section less than 700px width.", newSection);
+          newSections.push(newSection);
+          newSection = [];
+          currWidth = 0;
+        }
+        newSections.push([images[i]]);
+      } else if (images[i].width === 320) {
+        // botnavs
+        if (images[i+1] && images[i+1].width === 320) {
+          newSections.push([images[i], images[i+1]]);
+          i++;
+        } else {
+          newSections.push([images[i]]);
+        }
+      } else {
+        // vertical section, add image to current
+        currWidth += images[i].width;
+        newSection.push(images[i]);
+        if (currWidth >= 700) {
+          if (currWidth > 700) {
+            console.log("Warning: section exceeded 700px width.", newSection);
+          }
+          newSections.push(newSection);
+          newSection = [];
+          currWidth = 0;
+        }
+      }
+    }
+    this.setState({
+      sections: newSections
+    }, () => console.log(this.state));
   }
 
   handleInputChange(event) {
     const { name, value } = event.target;
     this.setState({
       [name]: value.split('\n'),
-    }, () => console.log('in inputchange ', this.state));
+    });
   }
 
   onDrop(droppedFiles) {
@@ -82,7 +128,10 @@ class App extends React.Component {
     });
     this.setState({
       imageInfos: newImageInfos,
-    }, () => console.log(this.state));
+    });
+
+    // Wait for images to load, it should be fast since they're local files
+    setTimeout(this.buildSections, 500);
   };
 
   render() {
@@ -133,16 +182,16 @@ class App extends React.Component {
                   disableClick
                   style={{}}
                   onDrop={this.onDrop}>{({ getRootProps, isDragActive }) => (
-                    this.state.imageInfos.length == 0 ? 
-                    <textarea
-                      {...getRootProps()}
-                      style={{ backgroundColor: (isDragActive ? '#ddd' : 'initial') }}
-                      wrap="off"
-                      rows="10"
-                      id="images"
-                      name="textareaValueImages"
-                      value={textareaValueImages}
-                      onChange={this.handleInputChange} /> 
+                    this.state.imageInfos.length == 0 ?
+                      <textarea
+                        {...getRootProps()}
+                        style={{ backgroundColor: (isDragActive ? '#ddd' : 'initial') }}
+                        wrap="off"
+                        rows="10"
+                        id="images"
+                        name="textareaValueImages"
+                        value={textareaValueImages}
+                        onChange={this.handleInputChange} />
                       :
                       <SortableList items={this.state.imageInfos.map(imageInfo => imageInfo.url)} onSortEnd={this.onSortEnd} onLoad={this.onLoad} />
                   )}</Dropzone>
