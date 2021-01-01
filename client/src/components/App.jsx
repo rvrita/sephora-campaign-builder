@@ -25,15 +25,7 @@ class App extends React.Component {
       textareaValueLinks: [],
       textareaValueImages: [],
       imageInfos: [],
-      sections: [],
-      /**
-       * { 
-       *   url: '',
-       *   filename: '',
-       *   width: 0,
-       *   height: 0,
-       * }
-       */
+      sections: [], // url, filename, width, height, link, alt
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleTabClick = this.handleTabClick.bind(this);
@@ -50,13 +42,12 @@ class App extends React.Component {
   onLoad(e) {
     var newImageInfos = this.state.imageInfos.slice();
     var index = newImageInfos.findIndex(item => item.url === e.target.src);
-    // console.log('in onload', e.target);
     newImageInfos[index].width = e.target.naturalWidth;
     newImageInfos[index].height = e.target.naturalHeight;
 
     this.setState({
       imageInfos: newImageInfos
-    }, () => console.log('after ', this.state));
+    });
   }
 
   onSortEnd({ oldIndex, newIndex }) {
@@ -89,12 +80,16 @@ class App extends React.Component {
         newSections.push([item]);
       } else if (item.width === 320) {
         // botnavs
-        // TODO: fix this
         if (images[i+1] && images[i+1].width === 320) {
-          newSections.push([item, images[i+1]]);
+          var item2 = {
+            ...images[i+1],
+            alt: this.state.textareaValueAlts[i+1] || '',
+            link: this.state.textareaValueLinks[i+1] || '<a href="#">',
+          };
+          newSections.push([item, item2]);
           i++;
         } else {
-          newSections.push([item]);
+          newSections.push([item, item]);
         }
       } else {
         // vertical section, add image to current
@@ -199,7 +194,10 @@ class App extends React.Component {
                         value={textareaValueImages}
                         onChange={this.handleInputChange} />
                       :
-                      <SortableList items={this.state.imageInfos.map(imageInfo => imageInfo.url)} onSortEnd={this.onSortEnd} onLoad={this.onLoad} />
+                      <SortableList 
+                        items={this.state.imageInfos.map(imageInfo => imageInfo.url)} 
+                        onSortEnd={this.onSortEnd} 
+                        onLoad={this.onLoad} />
                   )}</Dropzone>
               </label>
             </div>
@@ -215,7 +213,7 @@ class App extends React.Component {
             </div>
             <br />
             {activeTab === 'codeview'
-              && <textarea id="codeview" rows="25" cols="100" value={productsHtml} readOnly />}
+              && <textarea id="codeview" rows="25" value={productsHtml} readOnly />}
             {activeTab === 'preview'
               && <div id="preview" dangerouslySetInnerHTML={{ __html: productsHtml }} />}
           </div>

@@ -407,7 +407,8 @@ form .image-input {
   margin-left: 20px;
 }
 
-#examples textarea {
+#examples textarea,
+#codeview {
   width: 100%;
 }
 
