@@ -4,6 +4,8 @@ import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 const arrayMove = require('array-move');
 import content_template from '../../../templates/main-content-template';
 
+const ROW_HEIGHT = 60;
+
 const SortableItem = SortableElement(({ value, onLoad, onDeleteItem }) => (
   <li className="drag-item">
     <img height="60"
@@ -177,8 +179,8 @@ class App extends React.Component {
                 <br />
                 <textarea
                   wrap="off"
-                  rows="10"
                   id="alt"
+                  style={{minHeight: textareaValueAlts.length * ROW_HEIGHT}}
                   name="textareaValueAlts"
                   value={textareaValueAlts.join('\n')}
                   onChange={this.handleInputChange} />
@@ -192,7 +194,7 @@ class App extends React.Component {
                 <br />
                 <textarea
                   wrap="off"
-                  rows="10"
+                  style={{minHeight: textareaValueLinks.length * ROW_HEIGHT}}
                   id="links"
                   name="textareaValueLinks"
                   value={textareaValueLinks.join('\n')}
@@ -209,17 +211,6 @@ class App extends React.Component {
                   disableClick
                   style={{}}
                   onDrop={this.onDrop}>{({ getRootProps, isDragActive }) => (
-                    // this.state.imageInfos.length == 0 ?
-                    //   <textarea
-                    //     {...getRootProps()}
-                    //     style={{ backgroundColor: (isDragActive ? '#ddd' : 'initial') }}
-                    //     wrap="off"
-                    //     rows="10"
-                    //     id="images"
-                    //     name="textareaValueImages"
-                    //     value={textareaValueImages}
-                    //     onChange={this.handleInputChange} />
-                    //   :
                     <div
                       className="list-area"
                       {...getRootProps()}
