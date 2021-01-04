@@ -8,6 +8,6 @@ node_modules/
 .env
 
 # build
-dist/bundle.js
+bundle.js
 
 .DS_Store
