@@ -4,13 +4,19 @@ import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 const arrayMove = require('array-move');
 import content_template from '../../../templates/main-content-template';
 
-const SortableItem = SortableElement(({ value, onLoad }) => <li><img height="60" src={value} onLoad={onLoad} /></li>);
+const SortableItem = SortableElement(({ value, onLoad, onDeleteItem }) => (
+  <li className="drag-item">
+    <img height="60"
+      src={value}
+      onLoad={onLoad}
+      onContextMenu={(e) => { onDeleteItem(); e.preventDefault(); }} />
+  </li>));
 
-const SortableList = SortableContainer(({ items, onLoad }) => {
+const SortableList = SortableContainer(({ items, onLoad, onDeleteItem }) => {
   return (
     <ul>
       {items.map((value, index) => (
-        <SortableItem key={`item-${value}`} index={index} value={value} onLoad={onLoad} />
+        <SortableItem key={`item-${value}`} index={index} value={value} onLoad={onLoad} onDeleteItem={() => onDeleteItem(index)} />
       ))}
     </ul>
   );
@@ -32,6 +38,7 @@ class App extends React.Component {
     this.onDrop = this.onDrop.bind(this);
     this.onSortEnd = this.onSortEnd.bind(this);
     this.onLoad = this.onLoad.bind(this);
+    this.onDeleteImage = this.onDeleteImage.bind(this);
     this.buildSections = this.buildSections.bind(this);
   }
 
@@ -57,6 +64,12 @@ class App extends React.Component {
     this.buildSections();
   }
 
+  onDeleteImage(index) {
+    this.setState({
+      imageInfos: this.state.imageInfos.filter((_, idx) => idx != index),
+    });
+  }
+
   buildSections() {
     var newSections = [];
     var images = this.state.imageInfos;
@@ -80,11 +93,11 @@ class App extends React.Component {
         newSections.push([item]);
       } else if (item.width === 320) {
         // botnavs
-        if (images[i+1] && images[i+1].width === 320) {
+        if (images[i + 1] && images[i + 1].width === 320) {
           var item2 = {
-            ...images[i+1],
-            alt: this.state.textareaValueAlts[i+1] || '',
-            link: this.state.textareaValueLinks[i+1] || '<a href="#">',
+            ...images[i + 1],
+            alt: this.state.textareaValueAlts[i + 1] || '',
+            link: this.state.textareaValueLinks[i + 1] || '<a href="#">',
           };
           newSections.push([item, item2]);
           i++;
@@ -127,8 +140,9 @@ class App extends React.Component {
         height: 60,
       };
     });
+
     this.setState({
-      imageInfos: newImageInfos,
+      imageInfos: [...this.state.imageInfos, ...newImageInfos],
     });
 
     // Wait for images to load, it should be fast since they're local files
@@ -161,7 +175,13 @@ class App extends React.Component {
                 Alt text:
                 {' '}
                 <br />
-                <textarea wrap="off" rows="10" id="alt" name="textareaValueAlts" value={textareaValueAlts.join('\n')} onChange={this.handleInputChange} />
+                <textarea
+                  wrap="off"
+                  rows="10"
+                  id="alt"
+                  name="textareaValueAlts"
+                  value={textareaValueAlts.join('\n')}
+                  onChange={this.handleInputChange} />
               </label>
             </div>
             <div className="link-input">
@@ -170,7 +190,13 @@ class App extends React.Component {
                 Links:
                 {' '}
                 <br />
-                <textarea wrap="off" rows="10" id="links" name="textareaValueLinks" value={textareaValueLinks.join('\n')} onChange={this.handleInputChange} />
+                <textarea
+                  wrap="off"
+                  rows="10"
+                  id="links"
+                  name="textareaValueLinks"
+                  value={textareaValueLinks.join('\n')}
+                  onChange={this.handleInputChange} />
               </label>
             </div>
             <div className="image-input">
@@ -183,21 +209,27 @@ class App extends React.Component {
                   disableClick
                   style={{}}
                   onDrop={this.onDrop}>{({ getRootProps, isDragActive }) => (
-                    this.state.imageInfos.length == 0 ?
-                      <textarea
-                        {...getRootProps()}
-                        style={{ backgroundColor: (isDragActive ? '#ddd' : 'initial') }}
-                        wrap="off"
-                        rows="10"
-                        id="images"
-                        name="textareaValueImages"
-                        value={textareaValueImages}
-                        onChange={this.handleInputChange} />
-                      :
-                      <SortableList 
-                        items={this.state.imageInfos.map(imageInfo => imageInfo.url)} 
-                        onSortEnd={this.onSortEnd} 
+                    // this.state.imageInfos.length == 0 ?
+                    //   <textarea
+                    //     {...getRootProps()}
+                    //     style={{ backgroundColor: (isDragActive ? '#ddd' : 'initial') }}
+                    //     wrap="off"
+                    //     rows="10"
+                    //     id="images"
+                    //     name="textareaValueImages"
+                    //     value={textareaValueImages}
+                    //     onChange={this.handleInputChange} />
+                    //   :
+                    <div
+                      className="list-area"
+                      {...getRootProps()}
+                      style={{ backgroundColor: (isDragActive ? '#ddd' : 'initial') }}>
+                      <SortableList
+                        items={this.state.imageInfos.map(imageInfo => imageInfo.url)}
+                        onSortEnd={this.onSortEnd}
+                        onDeleteItem={this.onDeleteImage}
                         onLoad={this.onLoad} />
+                    </div>
                   )}</Dropzone>
               </label>
             </div>
@@ -208,27 +240,26 @@ class App extends React.Component {
           <br />
           <div id="codewindow">
             <div className="tab">
-              <button type="button" value="codeview" onClick={this.handleTabClick}>Generated Code</button>
-              <button type="button" value="preview" onClick={this.handleTabClick}>Preview</button>
+              <button
+                type="button"
+                value="codeview"
+                onClick={this.handleTabClick}>Generated Code</button>
+              <button
+                type="button"
+                value="preview"
+                onClick={this.handleTabClick}>Preview</button>
             </div>
             <br />
             {activeTab === 'codeview'
-              && <textarea id="codeview" rows="25" value={productsHtml} readOnly />}
+              && <textarea
+                id="codeview"
+                rows="25"
+                value={productsHtml}
+                readOnly />}
             {activeTab === 'preview'
-              && <div id="preview" dangerouslySetInnerHTML={{ __html: productsHtml }} />}
-          </div>
-
-          <div id="examples">
-            <h3>Example links</h3>
-            <textarea
-              id="example-links"
-              name="example-links"
-              rows="10"
-              defaultValue={`<a href="[@trackurl LinkID='' LinkName='dennisgrossdailypeel' LinkTag='pl-p4' LinkDesc='' Tracked='ON' Encode='OFF' LinkType='REDIRECT']https://www.sephora.com/product/P269122?skuId=1499482&$deep_link=true[/@trackurl]" target="_blank">
-<a href="[@trackurl LinkID='' LinkName='carolinaherreraparfum' LinkTag='pl-p5' LinkDesc='' Tracked='ON' Encode='OFF' LinkType='REDIRECT']https://www.sephora.com/product/P420533?skuId=1960707&$deep_link=true[/@trackurl]" target="_blank">
-<a href="[@trackurl LinkID='' LinkName='ctminilipsticklipliner' LinkTag='pl-p6' LinkDesc='' Tracked='ON' Encode='OFF' LinkType='REDIRECT']https://www.sephora.com/product/P458268?skuId=2339620&$deep_link=true[/@trackurl]" target="_blank">
-<a href="[@trackurl LinkID='' LinkName='pmgdivinerosepalette' LinkTag='pl-p7' LinkDesc='' Tracked='ON' Encode='OFF' LinkType='REDIRECT']https://www.sephora.com/product/P458276?skuId=2351542&$deep_link=true[/@trackurl]" target="_blank">`}
-            />
+              && <div
+                id="preview"
+                dangerouslySetInnerHTML={{ __html: productsHtml }} />}
           </div>
         </article>
       </div>
