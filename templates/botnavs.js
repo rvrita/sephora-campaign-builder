@@ -13,19 +13,19 @@ export default function botnavs(section) {
     <td style="padding-bottom:20px;">
       <table width="700" border="0" cellspacing="0" cellpadding="0" align="center">
         <tr>
-          <td width="20">
+        <td width="20">&nbsp;</td>
           <td>
             ${section[0].link}
               <img border="0" style="display: block" src="http://images.harmony.epsilon.com/ContentHandler/images/de0a3226-d396-4c2c-b3a8-3ede2f831505/images/${section[0].filename}" width="320" height="585" alt="${section[0].alt}"/>
             </a>
           </td>
-          <td width="20">
+          <td width="20">&nbsp;</td>
           <td align="right">
             ${section[1].link}
               <img border="0" style="display: block" src="http://images.harmony.epsilon.com/ContentHandler/images/de0a3226-d396-4c2c-b3a8-3ede2f831505/images/${section[1].filename}" width="320" height="585" alt="${section[1].alt}"/>
             </a>
           </td>
-          <td width="20">
+          <td width="20">&nbsp;</td>
         </tr>
       </table>
     </td>
