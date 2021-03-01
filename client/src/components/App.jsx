@@ -3,6 +3,8 @@ import Dropzone from 'react-dropzone';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 const arrayMove = require('array-move');
 import content_template from '../../../templates/main-content-template';
+import shell from '../../../templates/shell';
+import gmail from '../../../templates/gmail';
 
 const ROW_HEIGHT = 60;
 
@@ -34,8 +36,10 @@ class App extends React.Component {
       textareaValueImages: [],
       imageInfos: [],
       sections: [], // url, filename, width, height, link, alt
+      snippetType: '',
     }
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputChangeSnippets = this.handleInputChangeSnippets.bind(this);
     this.handleTabClick = this.handleTabClick.bind(this);
     this.onDrop = this.onDrop.bind(this);
     this.onSortEnd = this.onSortEnd.bind(this);
@@ -132,6 +136,13 @@ class App extends React.Component {
     }, () => this.buildSections());
   }
 
+  handleInputChangeSnippets(event) {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value,
+    });
+  }
+
   onDrop(droppedFiles) {
     console.log('onDrop', droppedFiles);
     const newImageInfos = droppedFiles.map((file) => {
@@ -153,9 +164,14 @@ class App extends React.Component {
 
   render() {
     const {
-      sections, textareaValueAlts, activeTab, textareaValueLinks, textareaValueImages
+      sections, textareaValueAlts, activeTab, textareaValueLinks, 
+      textareaValueImages, snippetType
     } = this.state;
-    if (sections.length > 0) {
+    if (snippetType === 'shell') {
+      var productsHtml = shell().replace(/\n\s+\n/g, '\n');
+    } else if (snippetType === 'gmail') {
+      var productsHtml = gmail().replace(/\n\s+\n/g, '\n');
+    } else if (sections.length > 0) {
       var productsHtml = content_template(sections, textareaValueAlts, textareaValueLinks).replace(/\n\s+\n/g, '\n');
     }
     return (
@@ -227,6 +243,19 @@ class App extends React.Component {
           </form>
           <br />
           <br />
+          <h2>Or choose a code snippet</h2>
+          <div className="snippet-list">
+            <label htmlFor="shell">
+              Shell snippet
+              {' '}
+              <input type="radio" id="shell" name="snippetType" value="shell" onChange={this.handleInputChangeSnippets} checked={snippetType === 'shell'} />
+            </label>
+            <label htmlFor="gmail">
+              Gmail snippet
+              {' '}
+              <input type="radio" id="gmail" name="snippetType" value="gmail" onChange={this.handleInputChangeSnippets} checked={snippetType === 'gmail'} />
+            </label>
+          </div>
           <h2>2. Get your code</h2>
           <br />
           <div id="codewindow">
