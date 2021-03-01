@@ -421,3 +421,44 @@ li.drag-item img {
 #codewindow h2 {
   margin: 60px 0 25px;
 }
+
+.snippet-list {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+input[type='radio']:after,
+input[type='radio']:checked:after {
+  top: -2px;
+  left: -1px;
+}
+
+input[type='checkbox']:after,
+input[type='checkbox']:checked:after {
+  top: -3px;
+  left: -2px;
+}
+
+input[type='radio']:after,
+input[type='radio']:checked:after,
+input[type='checkbox']:after,
+input[type='checkbox']:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  position: relative;
+  background-color:#fff;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid black;
+}
+
+input[type='radio']:checked:after,
+input[type='checkbox']:checked:after {
+  background-color: rgb(50, 45, 45);
+}
+
+input[type='radio']:after,
+input[type='checkbox']:after {
+  background-color:#fff;
+}
