@@ -42,6 +42,13 @@ export default function shell() {
                 <td align="center">[#include '64f7e729-fb9a-4cb0-9333-e5ee6d9865fa']</td>
               </tr>
             </table>
+            <table align="center" bgcolor="#000000" border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td align="center" valign="top" style="font-family: Arial, Helvetica, sans-serif; color: #acacac; font-size:12px; line-height:15px; mso-line-height-rule: exactly; padding: 0px 10px 65px 10px; letter-spacing: 0.5px;" class="pad14 mobileDisc">
+                
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
       </table>
