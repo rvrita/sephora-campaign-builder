@@ -26,7 +26,9 @@ export default function shell() {
                 <td align="center" valign="top">
                   <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                      <td align="center" valign="top" style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; line-height: 16px; color: #555555; padding: 12px 0px 0px 0px;">ph</td>
+                      <td align="center" valign="top">
+                        <div style="display: none; max-height: 0px; overflow: hidden;">ph [#-- Dev Sandbox / preheader_white_space --][#include '53166bec-2e05-4696-90b9-f065606583c7']</div>
+                      </td>
                     </tr>
                   </table>
                 </td>
