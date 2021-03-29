@@ -47,6 +47,7 @@ class App extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleInputChangeSnippets = this.handleInputChangeSnippets.bind(this);
     this.handleTabClick = this.handleTabClick.bind(this);
+    this.handleReset = this.handleReset.bind(this);
     this.onDrop = this.onDrop.bind(this);
     this.onSortEnd = this.onSortEnd.bind(this);
     this.onLoad = this.onLoad.bind(this);
@@ -56,6 +57,20 @@ class App extends React.Component {
 
   handleTabClick(event) {
     this.setState({ activeTab: event.target.value });
+  }
+
+  handleReset() {
+    if (confirm('Are you sure you want to clear the form?')) {
+      this.setState({
+        activeTab: '',
+        textareaValueAlts: [],
+        textareaValueLinks: [],
+        textareaValueImages: [],
+        imageInfos: [],
+        sections: [], // url, filename, width, height, link, alt
+        snippetType: '',  
+      });
+    }
   }
 
   onLoad(e) {
@@ -274,6 +289,10 @@ class App extends React.Component {
                 type="button"
                 value="preview"
                 onClick={this.handleTabClick}>Preview</button>
+              <button
+                type="button"
+                value="reset"
+                onClick={this.handleReset}>Reset</button>
             </div>
             <br />
             {activeTab === 'codeview'
