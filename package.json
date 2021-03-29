@@ -1,5 +1,5 @@
 {
-  "name": "portfolio-site",
+  "name": "sephora-campaign-builder",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rvrita/portfolio-site.git"
+    "url": "git+https://github.com/Sephora-Email-Dev-Team/sephora-campaign-builder.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rvrita/portfolio-site/issues"
+    "url": "https://github.com/Sephora-Email-Dev-Team/sephora-campaign-builder/issues"
   },
-  "homepage": "https://github.com/rvrita/portfolio-site#readme",
+  "homepage": "https://github.com/Sephora-Email-Dev-Team/sephora-campaign-builder#readme",
   "dependencies": {
     "array-move": "^3.0.1",
     "express": "^4.17.1",
