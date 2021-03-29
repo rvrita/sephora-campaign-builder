@@ -8,6 +8,12 @@ import gmail from '../../../templates/gmail';
 
 const ROW_HEIGHT = 60;
 
+window.addEventListener('beforeunload', function (e) {
+  // https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeunload
+  e.preventDefault();
+  e.returnValue = '';
+});
+
 const SortableItem = SortableElement(({ value, onLoad, onDeleteItem }) => (
   <li className="drag-item">
     <img height="60"
@@ -179,7 +185,7 @@ class App extends React.Component {
         <header>
           <div className="topline" />
           <div className="logo">
-            <img src="/images/logo.svg" alt="Sephora logo" width="200" height="auto" />
+            <img src="images/logo.svg" alt="Sephora logo" width="200" height="auto" />
             <h1>Email Campaign Builder</h1>
           </div>
           <div className="topline" />
