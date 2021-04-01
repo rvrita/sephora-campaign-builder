@@ -8,6 +8,12 @@ import gmail from '../../../templates/gmail';
 
 const ROW_HEIGHT = 60;
 
+window.addEventListener('beforeunload', function (e) {
+  // https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeunload
+  e.preventDefault();
+  e.returnValue = '';
+});
+
 const SortableItem = SortableElement(({ value, onLoad, onDeleteItem }) => (
   <li className="drag-item">
     <img height="60"
@@ -41,6 +47,7 @@ class App extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleInputChangeSnippets = this.handleInputChangeSnippets.bind(this);
     this.handleTabClick = this.handleTabClick.bind(this);
+    this.handleReset = this.handleReset.bind(this);
     this.onDrop = this.onDrop.bind(this);
     this.onSortEnd = this.onSortEnd.bind(this);
     this.onLoad = this.onLoad.bind(this);
@@ -50,6 +57,20 @@ class App extends React.Component {
 
   handleTabClick(event) {
     this.setState({ activeTab: event.target.value });
+  }
+
+  handleReset() {
+    if (confirm('Are you sure you want to clear the form?')) {
+      this.setState({
+        activeTab: '',
+        textareaValueAlts: [],
+        textareaValueLinks: [],
+        textareaValueImages: [],
+        imageInfos: [],
+        sections: [], // url, filename, width, height, link, alt
+        snippetType: '',  
+      });
+    }
   }
 
   onLoad(e) {
@@ -179,7 +200,7 @@ class App extends React.Component {
         <header>
           <div className="topline" />
           <div className="logo">
-            <img src="/images/logo.svg" alt="Sephora logo" width="200" height="auto" />
+            <img src="images/logo.svg" alt="Sephora logo" width="200" height="auto" />
             <h1>Email Campaign Builder</h1>
           </div>
           <div className="topline" />
@@ -268,6 +289,10 @@ class App extends React.Component {
                 type="button"
                 value="preview"
                 onClick={this.handleTabClick}>Preview</button>
+              <button
+                type="button"
+                value="reset"
+                onClick={this.handleReset}>Reset</button>
             </div>
             <br />
             {activeTab === 'codeview'

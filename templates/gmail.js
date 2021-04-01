@@ -5,7 +5,7 @@ export default function gmail() {
     "@context": "http://schema.org/",
     "@type": "Organization",
     "name": "Sephora",
-    "logo": "https://c24.dyneml.com/campaign/sephora/20200221/sephora_logo.webp?_=1584474797&e=1&g=884&id=43131&et=1&dpid=\${messageName}&uid=\${Profile.CustomerKey}"
+    "logo": "http://images.harmony.epsilon.com/ContentHandler/images/de0a3226-d396-4c2c-b3a8-3ede2f831505/images/2021_Sephora_Logo.png"
   },{
     "@context": "http://schema.org/",
     "@type": "DiscountOffer",
