@@ -12,7 +12,6 @@ export default function shell() {
 [#-- Dev Sandbox / Gmail_Promo_OM_Logo --][#include '0c909b00-f2ab-4480-b366-fbf574a0a56e']
 </head>
 <body style="margin: 0px; padding: 0px; background-color: #ffffff;  -webkit-text-size-adjust: none; -ms-text-size-adjust: none; text-size-adjust: none; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; padding:0; margin: 0; min-width: 100%">
-[@includeTrackingPixel/]
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ffffff" class="full-wrap tbl_cntr">
   <tr>
     <td align="center" bgcolor="#ffffff" style="vertical-align: top; padding: 0px 0px 0px 0px">
@@ -27,7 +26,7 @@ export default function shell() {
                   <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                       <td align="center" valign="top">
-                        <div style="display: none; max-height: 0px; overflow: hidden;">[#include '485f1111-3354-4a1b-b539-d7e84405f14a'], ph [#-- Dev Sandbox / preheader_white_space --][#include '53166bec-2e05-4696-90b9-f065606583c7']</div>
+                        <div style="display: none; max-height: 0px; overflow: hidden;">[#include '485f1111-3354-4a1b-b539-d7e84405f14a'], ph [#-- Dev Sandbox / preheader_white_space --][#include '53166bec-2e05-4696-90b9-f065606583c7']</div>[@includeTrackingPixel/]
                       </td>
                     </tr>
                   </table>
