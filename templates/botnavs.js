@@ -1,7 +1,12 @@
 export default function botnavs(section) {
-  return `
+    return `
 </table>
 <table width="700" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td style="padding-top:10px;">
+      [#-- Dev Sandbox / 2021_New_Clients_Banners_Map --][#contentmap id='dda18b65-5406-489b-a7f3-30539cb5a198'/]
+    </td>
+  </tr>
   <tr>
     <td>
       <a href="[@trackurl LinkID='' LinkName='spotitshopit' LinkTag='txt' LinkDesc='' Tracked='ON' Encode='OFF' LinkType='REDIRECT']https://www.sephora.com/?$deep_link=true[/@trackurl]"  target="_blank">
