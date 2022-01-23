@@ -42,7 +42,7 @@ class App extends React.Component {
       textareaValueImages: [],
       imageInfos: [],
       sections: [], // url, filename, width, height, link, alt
-      snippetType: '',
+      snippetType: 'content-builder',
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleInputChangeSnippets = this.handleInputChangeSnippets.bind(this);
@@ -159,6 +159,9 @@ class App extends React.Component {
 
   handleInputChangeSnippets(event) {
     const { name, value } = event.target;
+    if (value === 'gmail' || value === 'shell') {
+      this.setState({ activeTab: 'codeview' });
+    }
     this.setState({
       [name]: value,
     });
@@ -194,6 +197,8 @@ class App extends React.Component {
       var productsHtml = gmail().replace(/\n\s+\n/g, '\n');
     } else if (sections.length > 0) {
       var productsHtml = content_template(sections, textareaValueAlts, textareaValueLinks).replace(/\n\s+\n/g, '\n');
+    } else {
+      var productsHtml = '';
     }
     return (
       <div>
@@ -206,66 +211,13 @@ class App extends React.Component {
           <div className="topline" />
         </header>
         <article className="fixed">
-          <h2>1. Add your links and images</h2>
-          <form onSubmit={this.handleFormSubmit}>
-            <div className="alt-input">
-              <label htmlFor="alt">
-                <br />
-                Alt text:
-                {' '}
-                <br />
-                <textarea
-                  wrap="off"
-                  id="alt"
-                  style={{minHeight: textareaValueAlts.length * ROW_HEIGHT}}
-                  name="textareaValueAlts"
-                  value={textareaValueAlts.join('\n')}
-                  onChange={this.handleInputChange} />
-              </label>
-            </div>
-            <div className="link-input">
-              <label htmlFor="links">
-                <br />
-                Links:
-                {' '}
-                <br />
-                <textarea
-                  wrap="off"
-                  style={{minHeight: textareaValueLinks.length * ROW_HEIGHT}}
-                  id="links"
-                  name="textareaValueLinks"
-                  value={textareaValueLinks.join('\n')}
-                  onChange={this.handleInputChange} />
-              </label>
-            </div>
-            <div className="image-input">
-              <label htmlFor="images">
-                <br />
-                Images:
-                {' '}
-                <br />
-                <Dropzone
-                  disableClick
-                  style={{}}
-                  onDrop={this.onDrop}>{({ getRootProps, isDragActive }) => (
-                    <div
-                      className="list-area"
-                      {...getRootProps()}
-                      style={{ backgroundColor: (isDragActive ? '#ddd' : 'initial') }}>
-                      <SortableList
-                        items={this.state.imageInfos.map(imageInfo => imageInfo.url)}
-                        onSortEnd={this.onSortEnd}
-                        onDeleteItem={this.onDeleteImage}
-                        onLoad={this.onLoad} />
-                    </div>
-                  )}</Dropzone>
-              </label>
-            </div>
-          </form>
-          <br />
-          <br />
-          <h2>Or choose a code snippet</h2>
+        <h2>Choose the builder or a code snippet</h2>
           <div className="snippet-list">
+          <label htmlFor="content-builder">
+              Content builder
+              {' '}
+              <input type="radio" id="content-builder" name="snippetType" value="content-builder" onChange={this.handleInputChangeSnippets} checked={snippetType === 'content-builder'} />
+            </label>
             <label htmlFor="shell">
               Shell snippet
               {' '}
@@ -277,10 +229,69 @@ class App extends React.Component {
               <input type="radio" id="gmail" name="snippetType" value="gmail" onChange={this.handleInputChangeSnippets} checked={snippetType === 'gmail'} />
             </label>
           </div>
-          <h2>2. Get your code</h2>
+          <br/>
+
+          {snippetType === 'content-builder' &&
+          <><h2>Add your links and images</h2><form onSubmit={this.handleFormSubmit}>
+              <div className="alt-input">
+                <label htmlFor="alt">
+                  <br />
+                  Alt text:
+                  {' '}
+                  <br />
+                  <textarea
+                    wrap="off"
+                    id="alt"
+                    style={{ minHeight: textareaValueAlts.length * ROW_HEIGHT }}
+                    name="textareaValueAlts"
+                    value={textareaValueAlts.join('\n')}
+                    onChange={this.handleInputChange} />
+                </label>
+              </div>
+              <div className="link-input">
+                <label htmlFor="links">
+                  <br />
+                  Links:
+                  {' '}
+                  <br />
+                  <textarea
+                    wrap="off"
+                    style={{ minHeight: textareaValueLinks.length * ROW_HEIGHT }}
+                    id="links"
+                    name="textareaValueLinks"
+                    value={textareaValueLinks.join('\n')}
+                    onChange={this.handleInputChange} />
+                </label>
+              </div>
+              <div className="image-input">
+                <label htmlFor="images">
+                  <br />
+                  Images:
+                  {' '}
+                  <br />
+                  <Dropzone
+                    disableClick
+                    style={{}}
+                    onDrop={this.onDrop}>{({ getRootProps, isDragActive }) => (
+                      <div
+                        className="list-area"
+                        {...getRootProps()}
+                        style={{ backgroundColor: (isDragActive ? '#ddd' : 'initial') }}>
+                        <SortableList
+                          items={this.state.imageInfos.map(imageInfo => imageInfo.url)}
+                          onSortEnd={this.onSortEnd}
+                          onDeleteItem={this.onDeleteImage}
+                          onLoad={this.onLoad} />
+                      </div>
+                    )}</Dropzone>
+                </label>
+              </div>
+            </form><br/><br/></>}
+          
+          <h2>Get your code</h2>
           <br />
           <div id="codewindow">
-            <div className="tab">
+            {snippetType === 'content-builder' && <><div className="tab">
               <button
                 type="button"
                 value="codeview"
@@ -289,12 +300,11 @@ class App extends React.Component {
                 type="button"
                 value="preview"
                 onClick={this.handleTabClick}>Preview</button>
-              <button
+              {/* <button
                 type="button"
                 value="reset"
-                onClick={this.handleReset}>Reset</button>
-            </div>
-            <br />
+                onClick={this.handleReset}>Reset</button> */}
+            </div><br /></>}
             {activeTab === 'codeview'
               && <textarea
                 id="codeview"
