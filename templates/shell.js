@@ -8,7 +8,7 @@ export default function shell() {
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 <meta name="robots" content="no index" />
 <title>Sephora</title>
-[#include '14471a35-ce3d-4cd3-b346-9472a7aab6f7']
+[#-- Dev Sandbox / 2021_Navs_CSS --][#include '14471a35-ce3d-4cd3-b346-9472a7aab6f7']
 [#-- Dev Sandbox / Gmail_Promo_OM_Logo --][#include '0c909b00-f2ab-4480-b366-fbf574a0a56e']
 </head>
 <body style="margin: 0px; padding: 0px; background-color: #ffffff;  -webkit-text-size-adjust: none; -ms-text-size-adjust: none; text-size-adjust: none; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; padding:0; margin: 0; min-width: 100%">
@@ -26,7 +26,9 @@ export default function shell() {
                   <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                       <td align="center" valign="top">
-                        <div style="display: none; max-height: 0px; overflow: hidden;">[#include '485f1111-3354-4a1b-b539-d7e84405f14a'], ph [#-- Dev Sandbox / preheader_white_space --][#include '53166bec-2e05-4696-90b9-f065606583c7']</div>[@includeTrackingPixel/]
+                        <div style="display: none; max-height: 0px; overflow: hidden;">
+                          [#-- Dev Sandbox / FrstName Function --][#include '485f1111-3354-4a1b-b539-d7e84405f14a'], ph [#-- Dev Sandbox / preheader_white_space --][#include '53166bec-2e05-4696-90b9-f065606583c7']
+                        </div>[@includeTrackingPixel/]
                       </td>
                     </tr>
                   </table>
@@ -34,13 +36,13 @@ export default function shell() {
               </tr>
               <!--Preheader Text End here-->
               <tr>
-                <td align="center">[#include '4de187d8-3ad8-438a-b8d4-f31c30e0981f']</td>
+                <td align="center">[#-- Dev Sandbox / 2021_Navs_Header_Tap2App --][#include '4de187d8-3ad8-438a-b8d4-f31c30e0981f']</td>
               </tr>
               <tr>
                 <td align="center">content</td>
               </tr>
               <tr>
-                <td align="center">[#include '64f7e729-fb9a-4cb0-9333-e5ee6d9865fa']</td>
+                <td align="center">[#-- Dev Sandbox / 2021_Navs_Footer_Tap2App --][#include '64f7e729-fb9a-4cb0-9333-e5ee6d9865fa']</td>
               </tr>
             </table>
             <table align="center" bgcolor="#000000" border="0" cellpadding="0" cellspacing="0" width="100%">
