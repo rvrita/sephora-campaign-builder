@@ -4,6 +4,7 @@ import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 const arrayMove = require('array-move');
 import content_template from '../../../templates/main-content-template';
 import shellUS from '../../../templates/shellUS';
+import shellCA from '../../../templates/shellCA';
 import gmail from '../../../templates/gmail';
 
 const ROW_HEIGHT = 60;
@@ -159,7 +160,7 @@ class App extends React.Component {
 
   handleInputChangeSnippets(event) {
     const { name, value } = event.target;
-    if (value === 'gmail' || value === 'shellUS') {
+    if (value !== 'content-builder') {
       this.setState({ activeTab: 'codeview' });
     }
     this.setState({
@@ -193,6 +194,8 @@ class App extends React.Component {
     } = this.state;
     if (snippetType === 'shellUS') {
       var productsHtml = shellUS().replace(/\n\s+\n/g, '\n');
+    } else if (snippetType === 'shellCA') {
+      var productsHtml = shellCA().replace(/\n\s+\n/g, '\n');
     } else if (snippetType === 'gmail') {
       var productsHtml = gmail().replace(/\n\s+\n/g, '\n');
     } else if (sections.length > 0) {
@@ -222,6 +225,11 @@ class App extends React.Component {
               US shell snippet
               {' '}
               <input type="radio" id="shellUS" name="snippetType" value="shellUS" onChange={this.handleInputChangeSnippets} checked={snippetType === 'shellUS'} />
+            </label>
+            <label htmlFor="shellCA">
+              CA shell snippet
+              {' '}
+              <input type="radio" id="shellCA" name="snippetType" value="shellCA" onChange={this.handleInputChangeSnippets} checked={snippetType === 'shellCA'} />
             </label>
             <label htmlFor="gmail">
               Gmail snippet
