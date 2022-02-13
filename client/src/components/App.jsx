@@ -3,7 +3,7 @@ import Dropzone from 'react-dropzone';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 const arrayMove = require('array-move');
 import content_template from '../../../templates/main-content-template';
-import shell from '../../../templates/shell';
+import shellUS from '../../../templates/shellUS';
 import gmail from '../../../templates/gmail';
 
 const ROW_HEIGHT = 60;
@@ -159,7 +159,7 @@ class App extends React.Component {
 
   handleInputChangeSnippets(event) {
     const { name, value } = event.target;
-    if (value === 'gmail' || value === 'shell') {
+    if (value === 'gmail' || value === 'shellUS') {
       this.setState({ activeTab: 'codeview' });
     }
     this.setState({
@@ -191,8 +191,8 @@ class App extends React.Component {
       sections, textareaValueAlts, activeTab, textareaValueLinks, 
       textareaValueImages, snippetType
     } = this.state;
-    if (snippetType === 'shell') {
-      var productsHtml = shell().replace(/\n\s+\n/g, '\n');
+    if (snippetType === 'shellUS') {
+      var productsHtml = shellUS().replace(/\n\s+\n/g, '\n');
     } else if (snippetType === 'gmail') {
       var productsHtml = gmail().replace(/\n\s+\n/g, '\n');
     } else if (sections.length > 0) {
@@ -218,10 +218,10 @@ class App extends React.Component {
               {' '}
               <input type="radio" id="content-builder" name="snippetType" value="content-builder" onChange={this.handleInputChangeSnippets} checked={snippetType === 'content-builder'} />
             </label>
-            <label htmlFor="shell">
-              Shell snippet
+            <label htmlFor="shellUS">
+              US shell snippet
               {' '}
-              <input type="radio" id="shell" name="snippetType" value="shell" onChange={this.handleInputChangeSnippets} checked={snippetType === 'shell'} />
+              <input type="radio" id="shellUS" name="snippetType" value="shellUS" onChange={this.handleInputChangeSnippets} checked={snippetType === 'shellUS'} />
             </label>
             <label htmlFor="gmail">
               Gmail snippet
