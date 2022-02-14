@@ -44,8 +44,10 @@ class App extends React.Component {
       imageInfos: [],
       sections: [], // url, filename, width, height, link, alt
       snippetType: 'content-builder',
+      localeType: 'us', // us, caEN, caFR
     }
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputChangeLocale = this.handleInputChangeLocale.bind(this);
     this.handleInputChangeSnippets = this.handleInputChangeSnippets.bind(this);
     this.handleTabClick = this.handleTabClick.bind(this);
     this.handleReset = this.handleReset.bind(this);
@@ -158,6 +160,13 @@ class App extends React.Component {
     }, () => this.buildSections());
   }
 
+  handleInputChangeLocale(event) {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value,
+    });
+  }
+
   handleInputChangeSnippets(event) {
     const { name, value } = event.target;
     if (value !== 'content-builder') {
@@ -190,7 +199,7 @@ class App extends React.Component {
   render() {
     const {
       sections, textareaValueAlts, activeTab, textareaValueLinks, 
-      textareaValueImages, snippetType
+      textareaValueImages, snippetType, localeType
     } = this.state;
     if (snippetType === 'shellUS') {
       var productsHtml = shellUS().replace(/\n\s+\n/g, '\n');
@@ -199,7 +208,7 @@ class App extends React.Component {
     } else if (snippetType === 'gmail') {
       var productsHtml = gmail().replace(/\n\s+\n/g, '\n');
     } else if (sections.length > 0) {
-      var productsHtml = content_template(sections, textareaValueAlts, textareaValueLinks).replace(/\n\s+\n/g, '\n');
+      var productsHtml = content_template(sections, localeType).replace(/\n\s+\n/g, '\n');
     } else {
       var productsHtml = '';
     }
@@ -240,7 +249,25 @@ class App extends React.Component {
           <br/>
 
           {snippetType === 'content-builder' &&
-          <><h2>Add your links and images</h2><form onSubmit={this.handleFormSubmit}>
+          <>
+          <div className="locale">
+            <label htmlFor="locale-us">
+              <input type="radio" id="locale-us" name="localeType" value="us" onChange={this.handleInputChangeLocale} checked={localeType === 'us'} />
+              {' '}
+              US
+            </label>
+            <label htmlFor="locale-caEN">
+              <input type="radio" id="locale-caEN" name="localeType" value="caEN" onChange={this.handleInputChangeLocale} checked={localeType === 'caEN'} />
+              {' '}
+              CA EN
+            </label>
+            <label htmlFor="locale-caFR">
+              <input type="radio" id="locale-caFR" name="localeType" value="caFR" onChange={this.handleInputChangeLocale} checked={localeType === 'caFR'} />
+              {' '}
+              CA FR
+            </label>
+          </div>
+          <h2>Add your links and images</h2><form onSubmit={this.handleFormSubmit}>
               <div className="alt-input">
                 <label htmlFor="alt">
                   <br />

@@ -422,8 +422,15 @@ li.drag-item img {
   margin: 60px 0 25px;
 }
 
-.snippet-list {
+.snippet-list,
+.locale {
   font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+input[type='radio'],
+input[type='checkbox']{
+  width: 15px;
+  margin: 0 2px;
 }
 
 input[type='radio']:after,

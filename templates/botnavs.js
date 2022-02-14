@@ -1,19 +1,28 @@
-export default function botnavs(section) {
+export default function botnavs(section, locale) {
     return `
 </table>
 <table width="700" border="0" cellspacing="0" cellpadding="0" align="center">
-  <tr>
+  ${locale === 'us' ?
+  `<tr>
     <td style="padding-top:10px;">
       [#-- Dev Sandbox / 2021_New_Clients_Banners_Map --][#contentmap id='dda18b65-5406-489b-a7f3-30539cb5a198'/]
     </td>
-  </tr>
-  <tr>
+  </tr>` : ``}
+  ${locale === 'caFR' ?
+  `<tr>
     <td>
-      <a href="[@trackurl LinkID='' LinkName='spotitshopit' LinkTag='txt' LinkDesc='' Tracked='ON' Encode='OFF' LinkType='REDIRECT']https://www.sephora.com/?$deep_link=true[/@trackurl]"  target="_blank">
+      <a href="[@trackurl LinkID='' LinkName='spotitshopit' LinkTag='bb-spotitshopit' LinkDesc='' Tracked='ON' Encode='ON' LinkType='REDIRECT']https://www.sephora.com/ca/fr/?$deep_link=true[/@trackurl]"  target="_blank">
+        <img border="0" style="display: block" alt="Spot it. Shop it." src="https://epidm.epsilon.com/CMS/Coding/Sephora/2018/05_May/01386064/ShotSpop_FR.jpg" width="700" height="71" />
+      </a>
+    </td>
+  </tr>` : 
+  `<tr>
+    <td>
+      <a href="[@trackurl LinkID='' LinkName='spotitshopit' LinkTag='bb-spotitshopit' LinkDesc='' Tracked='ON' Encode='ON' LinkType='REDIRECT']https://www.sephora.com/ca/fr/?$deep_link=true[/@trackurl]"  target="_blank">
         <img border="0" style="display: block" alt="Spot it. Shop it." src="http://images.harmony.epsilon.com/ContentHandler/images?id=991bc8b3-0692-4b3a-86b8-1dae13277380" width="700" height="71" />
       </a>
     </td>
-  </tr>
+  </tr>`}
   <tr>
     <td style="padding-bottom:20px;">
       <table width="700" border="0" cellspacing="0" cellpadding="0" align="center">
