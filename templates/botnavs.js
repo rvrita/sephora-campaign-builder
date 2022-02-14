@@ -18,7 +18,9 @@ export default function botnavs(section, locale) {
   </tr>` : 
   `<tr>
     <td>
-      <a href="[@trackurl LinkID='' LinkName='spotitshopit' LinkTag='bb-spotitshopit' LinkDesc='' Tracked='ON' Encode='ON' LinkType='REDIRECT']https://www.sephora.com/ca/fr/?$deep_link=true[/@trackurl]"  target="_blank">
+    ${locale === 'caEN' ?
+      `<a href="[@trackurl LinkID='db25db80bdb3415d9c857ce10525206e' LinkName='spotitshopit' LinkTag='txt' Tracked='ON' Encode='OFF' AppendSuffix='ON' Render='ON' LinkType='REDIRECT']https://www.sephora.com/ca/en/?$deep_link=true[/@trackurl]"  target="_blank">`
+      : `<a href="[@trackurl LinkID='db25db80bdb3415d9c857ce10525206e' LinkName='spotitshopit' LinkTag='txt' Tracked='ON' Encode='OFF' AppendSuffix='ON' Render='ON' LinkType='REDIRECT']https://www.sephora.com/?$deep_link=true[/@trackurl]"  target="_blank">`}
         <img border="0" style="display: block" alt="Spot it. Shop it." src="http://images.harmony.epsilon.com/ContentHandler/images?id=991bc8b3-0692-4b3a-86b8-1dae13277380" width="700" height="71" />
       </a>
     </td>
