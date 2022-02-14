@@ -226,24 +226,24 @@ class App extends React.Component {
         <h2>Choose the builder or a code snippet</h2>
           <div className="snippet-list">
           <label htmlFor="content-builder">
-              Content builder
-              {' '}
               <input type="radio" id="content-builder" name="snippetType" value="content-builder" onChange={this.handleInputChangeSnippets} checked={snippetType === 'content-builder'} />
+              {' '}
+              Content builder
             </label>
             <label htmlFor="shellUS">
-              US shell snippet
-              {' '}
               <input type="radio" id="shellUS" name="snippetType" value="shellUS" onChange={this.handleInputChangeSnippets} checked={snippetType === 'shellUS'} />
+              {' '}
+              US shell snippet
             </label>
             <label htmlFor="shellCA">
-              CA shell snippet
-              {' '}
               <input type="radio" id="shellCA" name="snippetType" value="shellCA" onChange={this.handleInputChangeSnippets} checked={snippetType === 'shellCA'} />
+              {' '}
+              CA shell snippet
             </label>
             <label htmlFor="gmail">
-              Gmail snippet
-              {' '}
               <input type="radio" id="gmail" name="snippetType" value="gmail" onChange={this.handleInputChangeSnippets} checked={snippetType === 'gmail'} />
+              {' '}
+              Gmail snippet
             </label>
           </div>
           <br/>
