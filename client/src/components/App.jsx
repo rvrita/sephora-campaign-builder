@@ -310,7 +310,9 @@ class App extends React.Component {
                 id="codeview"
                 rows="25"
                 value={productsHtml}
-                readOnly />}
+                readOnly
+                onClick={(e) => e.target.select()} />
+              }
             {activeTab === 'preview'
               && <div
                 id="preview"
