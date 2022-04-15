@@ -20,7 +20,7 @@ export default function botnavs(section, locale) {
     <td align="center">
     ${locale === 'caEN' ?
       `<a href="[@trackurl LinkID='db25db80bdb3415d9c857ce10525206e' LinkName='spotitshopit' LinkTag='txt' Tracked='ON' Encode='OFF' AppendSuffix='ON' Render='ON' LinkType='REDIRECT']https://www.sephora.com/ca/en/?$deep_link=true[/@trackurl]"  target="_blank" style="display: block; font-family: Georgia, serif; font-size: 32px; text-decoration: none; color: black; border-top: 3px solid black; padding-top: 10px;">`
-      : `<a href="[@trackurl LinkID='db25db80bdb3415d9c857ce10525206e' LinkName='spotitshopit' LinkTag='txt' Tracked='ON' Encode='OFF' AppendSuffix='ON' Render='ON' LinkType='REDIRECT']https://www.sephora.com/?$deep_link=true[/@trackurl]"  target="_blank style="display: block; font-family: Georgia, serif; font-size: 32px; text-decoration: none; color: black; border-top: 3px solid black; padding-top: 10px;">`}
+      : `<a href="[@trackurl LinkID='db25db80bdb3415d9c857ce10525206e' LinkName='spotitshopit' LinkTag='txt' Tracked='ON' Encode='OFF' AppendSuffix='ON' Render='ON' LinkType='REDIRECT']https://www.sephora.com/?$deep_link=true[/@trackurl]"  target="_blank" style="display: block; font-family: Georgia, serif; font-size: 32px; text-decoration: none; color: black; border-top: 3px solid black; padding-top: 10px;">`}
         Spot it. Shop it.
       </a>
     </td>
