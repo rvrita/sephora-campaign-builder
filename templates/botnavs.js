@@ -10,18 +10,18 @@ export default function botnavs(section, locale) {
   </tr>` : ``}
   ${locale === 'caFR' ?
   `<tr>
-    <td>
-      <a href="[@trackurl LinkID='' LinkName='spotitshopit' LinkTag='bb-spotitshopit' LinkDesc='' Tracked='ON' Encode='ON' LinkType='REDIRECT']https://www.sephora.com/ca/fr/?$deep_link=true[/@trackurl]"  target="_blank">
-        <img border="0" style="display: block" alt="Spot it. Shop it." src="https://epidm.epsilon.com/CMS/Coding/Sephora/2018/05_May/01386064/ShotSpop_FR.jpg" width="700" height="71" />
+    <td align="center">
+      <a href="[@trackurl LinkID='' LinkName='spotitshopit' LinkTag='bb-spotitshopit' LinkDesc='' Tracked='ON' Encode='ON' LinkType='REDIRECT']https://www.sephora.com/ca/fr/?$deep_link=true[/@trackurl]"  target="_blank" style="display: block; font-family: Georgia, serif; font-size: 32px; text-decoration: none; color: black; border-top: 3px solid black; padding-top: 10px;">
+        Dénichez-les. Procurez-les-vous.
       </a>
     </td>
   </tr>` : 
   `<tr>
-    <td>
+    <td align="center">
     ${locale === 'caEN' ?
-      `<a href="[@trackurl LinkID='db25db80bdb3415d9c857ce10525206e' LinkName='spotitshopit' LinkTag='txt' Tracked='ON' Encode='OFF' AppendSuffix='ON' Render='ON' LinkType='REDIRECT']https://www.sephora.com/ca/en/?$deep_link=true[/@trackurl]"  target="_blank">`
-      : `<a href="[@trackurl LinkID='db25db80bdb3415d9c857ce10525206e' LinkName='spotitshopit' LinkTag='txt' Tracked='ON' Encode='OFF' AppendSuffix='ON' Render='ON' LinkType='REDIRECT']https://www.sephora.com/?$deep_link=true[/@trackurl]"  target="_blank">`}
-        <img border="0" style="display: block" alt="Spot it. Shop it." src="http://images.harmony.epsilon.com/ContentHandler/images?id=991bc8b3-0692-4b3a-86b8-1dae13277380" width="700" height="71" />
+      `<a href="[@trackurl LinkID='db25db80bdb3415d9c857ce10525206e' LinkName='spotitshopit' LinkTag='txt' Tracked='ON' Encode='OFF' AppendSuffix='ON' Render='ON' LinkType='REDIRECT']https://www.sephora.com/ca/en/?$deep_link=true[/@trackurl]"  target="_blank" style="display: block; font-family: Georgia, serif; font-size: 32px; text-decoration: none; color: black; border-top: 3px solid black; padding-top: 10px;">`
+      : `<a href="[@trackurl LinkID='db25db80bdb3415d9c857ce10525206e' LinkName='spotitshopit' LinkTag='txt' Tracked='ON' Encode='OFF' AppendSuffix='ON' Render='ON' LinkType='REDIRECT']https://www.sephora.com/?$deep_link=true[/@trackurl]"  target="_blank style="display: block; font-family: Georgia, serif; font-size: 32px; text-decoration: none; color: black; border-top: 3px solid black; padding-top: 10px;">`}
+        Spot it. Shop it.
       </a>
     </td>
   </tr>`}
