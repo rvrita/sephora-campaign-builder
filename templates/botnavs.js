@@ -11,17 +11,11 @@ export default function botnavs(section, locale) {
   ${locale === 'caFR' ?
   `<tr>
     <td>
-      <table width="700" border="0" cellspacing="0" cellpadding="0" align="center" style="padding-top: 10px;">
-        <tr>
-          <td height="3" width="19" style="margin: 0; padding: 0; font-size: 1px; mso-line-height-rule: exactly; line-height: 1px"></td>
-          <td height="3" width="662" bgcolor="#000000" style="background-color: #000000; margin: 0; padding: 0; font-size: 1px; mso-line-height-rule: exactly; line-height: 1px;"></td>
-          <td height="3" width="19" style="margin: 0; padding: 0; font-size: 1px; mso-line-height-rule: exactly; line-height: 1px;"></td>
-        </tr>
-      </table>
+      <table width="662" height="3" border="0" bgcolor="black" cellspacing="0" cellpadding="0" align="center" style="margin-top:10px;"><td style="font-size:1px; line-height:1px;">&nbsp;</td></table>
     </td>
   </tr>
   <tr>
-    <td align="center" style="padding: 10 0 10 0;">
+    <td align="center" style="padding: 10px 0 10px 0;">
       <a href="[@trackurl LinkID='' LinkName='spotitshopit' LinkTag='bb-spotitshopit' LinkDesc='' Tracked='ON' Encode='ON' LinkType='REDIRECT']https://www.sephora.com/ca/fr/?$deep_link=true[/@trackurl]"  target="_blank" style="display: block; font-family: Georgia, serif; font-size: 32px; text-decoration: none; color: #000000;">
         Dénichez-les. Procurez-les-vous.
       </a>
@@ -29,13 +23,7 @@ export default function botnavs(section, locale) {
   </tr>` : 
   `<tr>
     <td>
-      <table width="700" border="0" cellspacing="0" cellpadding="0" align="center" style="padding-top: 10px;">
-        <tr>
-          <td height="3" width="19" style="margin: 0; padding: 0; font-size: 1px; mso-line-height-rule: exactly; line-height: 1px"></td>
-          <td height="3" width="662" bgcolor="#000000" style="background-color: #000000; margin: 0; padding: 0; font-size: 1px; mso-line-height-rule: exactly; line-height: 1px;"></td>
-          <td height="3" width="19" style="margin: 0; padding: 0; font-size: 1px; mso-line-height-rule: exactly; line-height: 1px;"></td>
-        </tr>
-      </table>
+      <table width="662" height="3" border="0" bgcolor="black" cellspacing="0" cellpadding="0" align="center" style="margin-top:10px;"><td style="font-size:1px; line-height:1px;">&nbsp;</td></table>
     </td>
   </tr>
   <tr>
