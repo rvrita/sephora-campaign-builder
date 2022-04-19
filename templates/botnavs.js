@@ -9,15 +9,17 @@ export default function botnavs(section, locale) {
     </td>
   </tr>` : ``}
   <tr>
-    <td>
-      <table width="662" height="3" border="0" bgcolor="black" cellspacing="0" cellpadding="0" align="center" style="margin-top:10px;"><td style="font-size:1px; line-height:1px;">&nbsp;</td></table>
+    <td style="padding: 10px 0 0 0;">
+      <table width="662" height="3" border="0" bgcolor="black" cellspacing="0" cellpadding="0" align="center"><td style="font-size:1px; line-height:1px;">&nbsp;</td></table>
     </td>
   </tr>
   ${locale === 'caFR' ?
   `<tr>
     <td align="center" style="padding: 10px 0 10px 0;">
       <a href="[@trackurl LinkID='' LinkName='spotitshopit' LinkTag='bb-spotitshopit' LinkDesc='' Tracked='ON' Encode='ON' LinkType='REDIRECT']https://www.sephora.com/ca/fr/?$deep_link=true[/@trackurl]"  target="_blank" style="display: block; font-family: Georgia, serif; font-size: 32px; text-decoration: none; color: #000000;">
-        Dénichez-les. Procurez-les-vous.
+        <strong style="color: #000000; font-weight: normal;"> 
+          Dénichez-les. Procurez-les-vous.
+        </strong>
       </a>
     </td>
   </tr>` : 
@@ -26,7 +28,9 @@ export default function botnavs(section, locale) {
     ${locale === 'caEN' ?
       `<a href="[@trackurl LinkID='db25db80bdb3415d9c857ce10525206e' LinkName='spotitshopit' LinkTag='txt' Tracked='ON' Encode='OFF' AppendSuffix='ON' Render='ON' LinkType='REDIRECT']https://www.sephora.com/ca/en/?$deep_link=true[/@trackurl]"  target="_blank" style="display: block; font-family: Georgia, serif; font-size: 32px; text-decoration: none; color: black;">`
       : `<a href="[@trackurl LinkID='db25db80bdb3415d9c857ce10525206e' LinkName='spotitshopit' LinkTag='txt' Tracked='ON' Encode='OFF' AppendSuffix='ON' Render='ON' LinkType='REDIRECT']https://www.sephora.com/?$deep_link=true[/@trackurl]"  target="_blank" style="display: block; font-family: Georgia, serif; font-size: 32px; text-decoration: none; color: black;">`}
-        Spot it. Shop it.
+        <strong style="color: #000000; font-weight: normal;">
+          Spot it. Shop it.
+        </strong>
       </a>
     </td>
   </tr>`}
