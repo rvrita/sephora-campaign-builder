@@ -8,13 +8,13 @@ export default function botnavs(section, locale) {
       [#-- Dev Sandbox / 2021_New_Clients_Banners_Map --][#contentmap id='dda18b65-5406-489b-a7f3-30539cb5a198'/]
     </td>
   </tr>` : ``}
-  ${locale === 'caFR' ?
-  `<tr>
+  <tr>
     <td>
       <table width="662" height="3" border="0" bgcolor="black" cellspacing="0" cellpadding="0" align="center" style="margin-top:10px;"><td style="font-size:1px; line-height:1px;">&nbsp;</td></table>
     </td>
   </tr>
-  <tr>
+  ${locale === 'caFR' ?
+  `<tr>
     <td align="center" style="padding: 10px 0 10px 0;">
       <a href="[@trackurl LinkID='' LinkName='spotitshopit' LinkTag='bb-spotitshopit' LinkDesc='' Tracked='ON' Encode='ON' LinkType='REDIRECT']https://www.sephora.com/ca/fr/?$deep_link=true[/@trackurl]"  target="_blank" style="display: block; font-family: Georgia, serif; font-size: 32px; text-decoration: none; color: #000000;">
         Dénichez-les. Procurez-les-vous.
@@ -22,11 +22,6 @@ export default function botnavs(section, locale) {
     </td>
   </tr>` : 
   `<tr>
-    <td>
-      <table width="662" height="3" border="0" bgcolor="black" cellspacing="0" cellpadding="0" align="center" style="margin-top:10px;"><td style="font-size:1px; line-height:1px;">&nbsp;</td></table>
-    </td>
-  </tr>
-  <tr>
     <td align="center" style="padding: 10px 0 10px 0;">
     ${locale === 'caEN' ?
       `<a href="[@trackurl LinkID='db25db80bdb3415d9c857ce10525206e' LinkName='spotitshopit' LinkTag='txt' Tracked='ON' Encode='OFF' AppendSuffix='ON' Render='ON' LinkType='REDIRECT']https://www.sephora.com/ca/en/?$deep_link=true[/@trackurl]"  target="_blank" style="display: block; font-family: Georgia, serif; font-size: 32px; text-decoration: none; color: black;">`
